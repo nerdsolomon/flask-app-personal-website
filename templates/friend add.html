@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+    <title>add friend</title>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">NERDSOLOMON</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+         <div class="row g-0">
+          <div class="col">
+     <a class="nav-link link-light active" href="/">Home</a>
+          </div>
+          <div class="col">
+     <a class="nav-link link-light" href="/friends">Friends</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/projects">Projects</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/cgpa-cal">CGPA</a>
+          </div>
+          <div class="col">
+     <a class="nav-link link-light" href="/user">Admin</a>
+          </div>
+         </div>
+        </div>
+      </div>
+    </nav>
+    <br/>
+
+<div class='container'>
+<form action='/friend-add' method='POST' enctype="multipart/form-data">
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <small>{{ message }}</small>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+<h6>Add Friend</h6>
+
+<br/>
+     <form class="d-flex">
+      <input type="text" class="form-control" placeholder='First name' name='name' value='{{ name }}'>
+      <br/>
+      <input type="text" class="form-control" placeholder='Last name' name='surname' value='{{ surname }}'>
+      <br/>
+  <select class="form-select" name='gender'>
+    <option selected>Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+      <br/>
+      <input type="text" class="form-control" placeholder='Occupation' name='work' value='{{ work }}'>
+      <br/>
+      <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email" name='email' value='{{ email }}'>
+      <br/>
+      <textarea class="form-control" rows="3" placeholder='Comment...' name='comment' value='{{comment }}'></textarea>
+      <br/>
+<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="File" name='photo'>
+      <br/>
+<button type="submit" class="btn btn-outline-secondary">Submit</button>
+<br/><br/>
+     </form>
+
+</form>
+</div>
+
+<script src="/static/script.js"></script>
+  </body>
+</html>

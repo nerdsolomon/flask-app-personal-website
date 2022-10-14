@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+    <title>{{ friends.name }}'s Information</title>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">NERDSOLOMON</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+         <div class="row g-0">
+          <div class="col">
+     <a class="nav-link link-light active" href="/">Home</a>
+          </div>
+          <div class="col">
+     <a class="nav-link link-light" href="/friends">Friends</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/projects">Projects</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/cgpa-cal">CGPA</a>
+          </div>
+     {% if current_user.is_authenticated %}
+          <div class="col">
+     <a class="nav-link link-light" href="/user">Admin</a>
+          </div>
+     <a class="nav-link link-light" href="/user-logout">Logout</a>
+     {% else %}
+     <a class="nav-link link-light" href="/user-login">Login</a>
+     {% endif %}
+  
+         </div>
+        </div>
+      </div>
+    </nav>
+    <br/>
+
+<div class='container'>
+
+{% if current_user.is_authenticated %}
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <small>{{ message }}</small>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+
+<center>
+<h5>{{ friends.name }}'s Information</h5>
+
+{% if current_user.is_authenticated %}
+<a href="{{url_for('edit_friend', type=friends.id)}}" class="btn btn-outline-secondary btn-sm">Edit</a>
+<a href="{{url_for('del_friend', type=friends.id)}}" class="btn btn-outline-secondary btn-sm">Remove</a>
+{% endif %}
+
+<br/>
+<img src="data:;base64,{{ photo }}" alt='' height='200' width='200' class='border-light rounded-circle'>
+</center>
+<br/>
+   <div class="card" style="width: device-width, initial-scale=1">
+  <div class="card-header">
+    <strong>First Name</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.name }}</li>
+  </ul>
+  <div class="card-header">
+    <strong>Last Name</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.surname }}</li>
+  </ul>
+  <div class="card-header">
+    <strong>Gender</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.gender }}</li>
+  </ul>
+  <div class="card-header">
+    <strong>Occupation</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.work }}</li>
+  </ul>
+  <div class="card-header">
+    <strong>Email Address</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.email }}</li>
+  </ul>
+  <div class="card-header">
+    <strong>Description</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+<li class="list-group-item">{{ friends.comment }}</li>
+  </ul>
+
+</div>
+</div>
+<br/><br/>
+<script src="/static/script.js"></script>
+  </body>
+</html>

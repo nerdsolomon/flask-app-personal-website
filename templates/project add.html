@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+    <title>add project</title>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">NERDSOLOMON</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+         <div class="row g-0">
+          <div class="col">
+     <a class="nav-link link-light active" href="/">Home</a>
+          </div>
+          <div class="col">
+     <a class="nav-link link-light" href="/friends">Friends</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/projects">Projects</a>
+          </div>
+          <div class="col">
+   <a class="nav-link link-light" href="/cgpa-cal">CGPA</a>
+          </div>
+          <div class="col">
+     <a class="nav-link link-light" href="/user">Admin</a>
+          </div>
+         </div>
+        </div>
+      </div>
+    </nav>
+    <br/>
+<div class='container'>
+<form action='/project-add' method='POST' enctype="multipart/form-data">
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <small>{{ message }}</small>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+<h6>Add Project</h6>
+
+<br/>
+     <form class="d-flex">
+<input type="text" class="form-control" placeholder='Project title' name='title' value='{{ title }}'>
+      <br/>
+<textarea class="form-control" rows="5" placeholder='About...' name='body'>{{ body }}</textarea>
+      <br/>
+<textarea class="form-control" rows="7" placeholder='Code...' name='code'>{{ code }}</textarea>
+      <br/>
+<input type="file" class="form-control" name='media' value='media' multiple>
+      <br/>
+<button type="submit" class="btn btn-outline-secondary">Submit</button>
+<br/><br/>
+     </form>
+
+</form>
+</div>
+
+<script src="/static/script.js"></script>
+  </body>
+</html>
